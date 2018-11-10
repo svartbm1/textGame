@@ -28,6 +28,11 @@ class Player:
         if value < 5 or value > 18:
             print "Scores must be between 5 and 18."
         elif s in self.stats:                
-            self.stats.update({s: value})
+            if self.pointbuy >= self.stat_cost(value, self.stats[s]):
+                self.pointbuy -= self.stat_cost(value, self.stats[s])
+                self.stats.update({s: value})
         else: 
             print stat + "is not a valid stat."
+
+    def print_info(self):
+        print self.name + "\n Points left:" + str(self.pointbuy) + "\n Stats: " + str(self.stats['str']) + " " + str(self.stats['dex'])+ " " + str(self.stats['con'])+ " " + str(self.stats['int'])+ " " + str(self.stats['wis'])+ " " + str(self.stats['cha'])
